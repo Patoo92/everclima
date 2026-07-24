@@ -1,0 +1,42 @@
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+
+.layout-contacto{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:var(--sp-5);
+  padding-block:var(--sp-6);
+  align-items:start;
+}
+.tarjetas-contacto{ display:flex; flex-direction:column; gap:var(--sp-3); }
+.tarjeta-contacto{
+  padding:var(--sp-3);
+  display:flex; align-items:flex-start; gap:var(--sp-3);
+}
+.tarjeta-contacto .icono-servicio{ flex-shrink:0; }
+.tarjeta-contacto h3{ font-size:var(--t-base); margin-bottom:.3em; }
+.tarjeta-contacto p, .tarjeta-contacto a{ color:var(--acero-400); font-size:var(--t-sm); }
+.tarjeta-contacto a:hover{ color:var(--gas-400); }
+
+.mapa-marcador{
+  aspect-ratio:16/10;
+  border-radius:var(--radio-lg);
+  border:1px solid var(--grafito-800);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255,106,43,.16), transparent 60%),
+    var(--grafito-900);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.6em; text-align:center; padding:var(--sp-4);
+  margin-top:var(--sp-3);
+}
+.mapa-marcador svg{ width:34px; height:34px; color:var(--llama-500); }
+.mapa-marcador p{ color:var(--acero-400); font-size:var(--t-sm); margin:0; max-width:26ch; }
+
+.panel-form-contacto{ padding:var(--sp-5); }
+.panel-form-contacto h2{ font-size:var(--t-2xl); }
+.panel-form-contacto > p{ color:var(--acero-400); margin-top:var(--sp-2); margin-bottom:var(--sp-4); }
+
+@media (max-width: 900px){
+  .layout-contacto{ grid-template-columns:1fr; }
+}
