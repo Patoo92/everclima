@@ -1,0 +1,9 @@
+.legal{ max-width:780px; margin-inline:auto; padding-block:var(--sp-6) var(--sp-7); }
+.legal h1{ font-size:var(--t-3xl); margin-bottom:var(--sp-1); }
+.legal .fecha{ font-family:var(--f-tecnico); font-size:var(--t-xs); color:var(--acero-400); display:block; margin-bottom:var(--sp-4); }
+.legal h2{ font-size:var(--t-xl); margin-top:var(--sp-5); color:var(--hielo-050); }
+.legal p, .legal li{ color:var(--acero-400); font-size:var(--t-sm); line-height:1.7; }
+.legal ul{ padding-left:1.2em; margin:.5em 0; }
+.legal a{ text-decoration:underline; color:var(--llama-500); }
+.legal table{ border-collapse:collapse; width:100%; font-size:var(--t-sm); }
+.legal th, .legal td{ border:1px solid var(--grafito-800); padding:.5em .8em; text-align:left; vertical-align:top; }

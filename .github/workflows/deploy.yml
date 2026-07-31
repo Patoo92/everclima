@@ -1,0 +1,27 @@
+name: Desplegar web al hosting
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Subir archivos por sFTP a PiensaSolutions
+        uses: wangyucode/sftp-upload-action@v2
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          localDir: .
+          remoteDir: ${{ secrets.SFTP_REMOTE_DIR }}
+          exclude: |
+            .git/,
+            .github/,
+            .htaccess.example

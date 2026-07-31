@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
-
 :root{
 --grafito-950:#F5EFE4;
   --grafito-900:#FFFFFF;
@@ -53,6 +51,8 @@ html{ scroll-behavior:smooth; }
   *, *::before, *::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
 }
 
+html, body{ overflow-x:hidden; }
+
 body{
   margin:0;
   background:var(--grafito-950);
@@ -64,6 +64,17 @@ body{
 }
 
 img{ max-width:100%; display:block; }
+picture{ display:contents; }
+
+.icono-servicio{
+  width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--radio-md);
+  background:var(--grafito-800);
+  color:var(--gas-400);
+  flex-shrink:0;
+}
+.icono-servicio svg{ width:22px; height:22px; }
 a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; cursor:pointer; }
 input, textarea, select{ font-family:inherit; font-size:1rem; }
@@ -220,6 +231,7 @@ h1,h2,h3,h4{
 }
 .marca .icono-llama{ width:30px; height:30px; flex-shrink:0; }
 .marca span{ color:var(--llama-500); }
+.logo-everclima{ height:44px; width:auto; }
 
 .menu{ display:flex; align-items:center; gap:var(--sp-3); list-style:none; margin:0; padding:0; }
 .menu > li{ position:relative; }
@@ -299,6 +311,9 @@ h1,h2,h3,h4{
   flex-wrap:wrap; gap:var(--sp-2);
   font-size:var(--t-xs); color:var(--acero-400);
 }
+.enlaces-legales{ display:flex; flex-wrap:wrap; gap:.4em 1em; }
+.enlaces-legales a{ color:var(--acero-400); text-decoration:underline; }
+.enlaces-legales a:hover{ color:var(--gas-400); }
 .redes-pie{ display:flex; gap:.8em; }
 .redes-pie a{
   width:36px; height:36px; border-radius:50%;
@@ -343,8 +358,10 @@ h1,h2,h3,h4{
     transform:translateX(100%);
     transition:transform .3s ease;
     overflow-y:auto;
+    visibility:hidden;
+    pointer-events:none;
   }
-  .menu.abierto{ transform:translateX(0); }
+  .menu.abierto{ transform:translateX(0); visibility:visible; pointer-events:auto; }
   .menu > li > a{ padding:1em .2em; border-bottom:1px solid var(--grafito-800); justify-content:space-between; }
   .submenu{
     position:static; opacity:1; visibility:visible; transform:none;
@@ -366,4 +383,152 @@ h1,h2,h3,h4{
     --t-3xl: 2rem;
     --t-2xl: 1.6rem;
   }
+}
+
+/* ============================================================
+   VISOR DE FOTOS (lightbox) — fotos recortadas a pantalla completa
+   ============================================================ */
+
+.galeria figure, .item-trabajo{
+  position:relative;
+  cursor:zoom-in;
+}
+.galeria figure::after, .item-trabajo::after{
+  content:"";
+  position:absolute; inset:0; z-index:1;
+  background:rgba(0,0,0,.22);
+  opacity:0;
+  transition:opacity .2s ease;
+  pointer-events:none;
+}
+.galeria figure::before, .item-trabajo::before{
+  content:"";
+  position:absolute; inset:0; z-index:2;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M20 20l-4.5-4.5'/%3E%3C/svg%3E") center / 26px 26px no-repeat,
+    radial-gradient(circle at center, rgba(0,0,0,.5) 0%, rgba(0,0,0,.5) 50%, transparent 52%) center / 66px 66px no-repeat;
+  opacity:0;
+  transform:scale(.92);
+  transition:opacity .2s ease, transform .2s ease;
+  pointer-events:none;
+}
+.galeria figure:hover::after, .item-trabajo:hover::after,
+.galeria figure:focus-within::after, .item-trabajo:focus-within::after{
+  opacity:1;
+}
+.galeria figure:hover::before, .item-trabajo:hover::before,
+.galeria figure:focus-within::before, .item-trabajo:focus-within::before{
+  opacity:1;
+  transform:scale(1);
+}
+
+.lightbox{
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center; justify-content:center;
+  padding:1rem;
+}
+.lightbox.abierto{ display:flex; }
+.lightbox figure{
+  margin:0;
+  display:flex; flex-direction:column; align-items:center;
+  max-width:100%; max-height:100%;
+}
+.lightbox img{
+  max-width:calc(100vw - 2rem);
+  max-height:calc(100vh - 6rem);
+  width:auto; height:auto;
+  object-fit:contain;
+  border-radius:6px;
+  box-shadow:0 8px 40px rgba(0,0,0,.6);
+}
+.lightbox figcaption{
+  margin-top:.8rem;
+  font-family:var(--f-tecnico);
+  font-size:var(--t-xs);
+  letter-spacing:.04em;
+  color:#E4D9C4;
+}
+.lightbox-cierre, .lightbox-flecha{
+  position:absolute; z-index:3;
+  border:none; cursor:pointer;
+  background:rgba(0,0,0,.45);
+  color:#F5EFE4;
+  font-family:var(--f-cuerpo);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s ease, color .15s ease;
+}
+.lightbox-cierre{
+  top:1rem; right:1rem;
+  width:44px; height:44px;
+  border-radius:50%;
+  font-size:1.6rem; line-height:1;
+}
+.lightbox-flecha{
+  top:50%; transform:translateY(-50%);
+  width:48px; height:48px;
+  border-radius:50%;
+  font-size:2rem; line-height:1;
+  padding-bottom:.15em;
+}
+.lightbox-anterior{ left:1rem; }
+.lightbox-siguiente{ right:1rem; }
+.lightbox-cierre:hover, .lightbox-flecha:hover{
+  background:rgba(255,255,255,.2);
+  color:#FFFFFF;
+}
+.lightbox-flecha.oculto{ display:none; }
+
+/* ============================================================
+   MENSAJE DE BIENVENIDA — visita recurrente
+   ============================================================ */
+
+.aviso-bienvenida{
+  position:fixed; top:8.5rem; left:0; right:0;
+  margin-inline:auto;
+  width:fit-content;
+  max-width:min(90vw, 420px);
+  transform:translateY(-10px);
+  z-index:400;
+  display:flex; align-items:center; gap:.9em;
+  background:var(--grafito-900);
+  border:1px solid var(--grafito-800);
+  border-radius:var(--radio-lg);
+  padding:.85em 1.3em;
+  box-shadow:0 16px 40px -14px rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease, transform .3s ease;
+}
+.aviso-bienvenida.visible{
+  opacity:1;
+  transform:none;
+}
+.aviso-bienvenida-marca{
+  width:10px; height:10px; border-radius:50%;
+  background:var(--llama-500);
+  flex-shrink:0;
+}
+.aviso-bienvenida-texto{
+  min-width:0;
+}
+.aviso-bienvenida-texto strong{
+  display:block;
+  font-family:var(--f-cuerpo);
+  font-size:var(--t-sm);
+  color:var(--hielo-050);
+  overflow-wrap:anywhere;
+}
+.aviso-bienvenida-texto small{
+  display:block;
+  font-family:var(--f-tecnico);
+  font-size:var(--t-2xs);
+  letter-spacing:.03em;
+  color:var(--acero-400);
+  margin-top:.2em;
+}
+
+@media (max-width: 860px){
+  .aviso-bienvenida{ top:10.5rem; }
 }

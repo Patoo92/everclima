@@ -212,6 +212,7 @@
   padding:var(--sp-5);
   background:var(--grafito-950);
   display:flex; flex-direction:column; justify-content:space-between;
+  min-width:0;
 }
 .panel-formulario .lado-info h2{ font-size:var(--t-2xl); margin-top:var(--sp-2); }
 .panel-formulario .lado-info p{ color:var(--acero-400); margin-top:var(--sp-2); }
@@ -221,16 +222,18 @@
   font-weight:600; font-size:var(--t-sm);
   padding:.8em; border-radius:var(--radio-sm);
   border:1px solid var(--grafito-800);
+  overflow-wrap:anywhere;
   transition:border-color .15s, background .15s;
 }
 .contacto-directo a:hover{ border-color:var(--llama-500); background:var(--grafito-900); }
 .contacto-directo svg{ width:17px; height:17px; color:var(--llama-500); flex-shrink:0; }
 
-.form-presupuesto{ padding:var(--sp-5); display:flex; flex-direction:column; gap:var(--sp-3); }
+.form-presupuesto{ padding:var(--sp-5); display:flex; flex-direction:column; gap:var(--sp-3); min-width:0; }
 .fila-campos{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); }
 .campo{ display:flex; flex-direction:column; gap:.5em; }
 .campo label{ font-size:var(--t-xs); font-weight:600; color:var(--acero-400); }
 .campo input, .campo select, .campo textarea{
+  width:100%;
   background:var(--grafito-950);
   border:1.5px solid var(--grafito-800);
   border-radius:var(--radio-sm);
