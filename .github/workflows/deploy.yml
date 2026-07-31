@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Subir archivos por sFTP a PiensaSolutions
-        uses: wangyucode/sftp-upload-action@v2
+        uses: wangyucode/sftp-upload-action@v2.0.4
         with:
           host: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USER }}
@@ -21,7 +21,5 @@ jobs:
           port: 22
           localDir: .
           remoteDir: ${{ secrets.SFTP_REMOTE_DIR }}
-          exclude: |
-            .git/,
-            .github/,
-            .htaccess.example
+          compress: true
+          exclude: .git,.github
