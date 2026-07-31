@@ -12,6 +12,10 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
+      - name: Probar conexion al servidor sFTP
+        run: |
+          timeout 20 bash -c 'echo > /dev/tcp/${{ secrets.SFTP_HOST }}/22' && echo "CONEXION OK: puerto 22 abierto" || { echo "FALLO: no se puede conectar al puerto 22"; exit 1; }
+
       - name: Subir archivos por sFTP a PiensaSolutions
         uses: wangyucode/sftp-upload-action@v2.0.4
         with:
