@@ -12,18 +12,20 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
-      - name: Probar conexion al servidor sFTP
+      - name: Probar conexion al servidor FTP
         run: |
-          timeout 20 bash -c 'echo > /dev/tcp/${{ secrets.SFTP_HOST }}/22' && echo "CONEXION OK: puerto 22 abierto" || { echo "FALLO: no se puede conectar al puerto 22"; exit 1; }
+          timeout 20 bash -c 'echo > /dev/tcp/${{ secrets.SFTP_HOST }}/21' && echo "CONEXION OK: puerto 21 abierto" || { echo "FALLO: no se puede conectar al puerto 21"; exit 1; }
 
-      - name: Subir archivos por sFTP a PiensaSolutions
-        uses: wangyucode/sftp-upload-action@v2.0.4
+      - name: Subir archivos por FTP a PiensaSolutions
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.SFTP_HOST }}
+          server: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USER }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          port: 22
-          localDir: .
-          remoteDir: ${{ secrets.SFTP_REMOTE_DIR }}
-          compress: true
-          exclude: .git,.github
+          port: 21
+          protocol: ftp
+          server-dir: /html/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
