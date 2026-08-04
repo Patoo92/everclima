@@ -129,6 +129,11 @@
 }
 .cta-final h3{ font-size:var(--t-xl); }
 .cta-final p{ color:var(--acero-400); margin:.4em 0 0; }
+.cta-final.cta-final--clara h3,
+.cta-final.cta-final--clara p{ color:var(--blanco); }
+.cta-final.cta-final--clara p{ opacity:.92; }
+.cta-final.cta-final--clara .boton--fantasma{ color:var(--blanco); border-color:rgba(255,255,255,.35); }
+.cta-final.cta-final--clara .boton--fantasma:hover{ border-color:rgba(255,255,255,.75); background:rgba(255,255,255,.08); }
 .cta-final .acciones{ display:flex; gap:var(--sp-2); flex-wrap:wrap; }
 
 @media (max-width: 860px){
