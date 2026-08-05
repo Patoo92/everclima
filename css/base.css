@@ -99,22 +99,7 @@ h1,h2,h3,h4{
   padding-inline:var(--sp-4);
 }
 
-.eyebrow{
-  font-family:var(--f-tecnico);
-  font-size:var(--t-xs);
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--llama-500);
-  display:flex;
-  align-items:center;
-  gap:.6em;
-}
-.eyebrow::before{
-  content:'';
-  width:22px; height:1.5px;
-  background:var(--llama-500);
-  flex-shrink:0;
-}
+
 
 .boton{
   display:inline-flex;
