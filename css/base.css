@@ -2,7 +2,7 @@
 --grafito-950:#F5EFE4;
   --grafito-900:#FFFFFF;
   --grafito-800:#E4D9C4;
-  --acero-400:#7A7266;
+  --acero-400:#6A6258;
   --hielo-050:#3A342B;
   --llama-500:#C9622E;
   --llama-600:#B0501F;
@@ -368,6 +368,26 @@ h1,h2,h3,h4{
     --t-3xl: 2rem;
     --t-2xl: 1.6rem;
   }
+}
+
+/* ============================================================
+   PRINT — estilos para impresión
+   ============================================================ */
+@media print{
+  *, *::before, *::after{ box-shadow:none !important; }
+  body{ background:#fff; color:#000; font-size:11pt; }
+  .encabezado, .barra-superior, .pie, .aviso-cookies,
+  .aviso-bienvenida, .acciones-nav, .boton-menu-movil,
+  .lightbox, .redes-pie, .salto-a-contenido,
+  .boton--llama, .boton--fantasma, .boton--oscuro{ display:none !important; }
+  a{ color:#000; text-decoration:underline; }
+  a[href]::after{ content:" (" attr(href) ")"; font-size:9pt; color:#666; }
+  nav a[href]::after, .menu a[href]::after{ content:none; }
+  .contenedor{ max-width:100%; padding:0; }
+  img{ max-width:100% !important; page-break-inside:avoid; }
+  h1, h2, h3, h4{ page-break-after:avoid; }
+  .card{ border:1px solid #ccc; background:#fff; }
+  .galeria{ columns:2; }
 }
 
 /* ============================================================
